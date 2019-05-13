@@ -1,0 +1,52 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Monitoring>
+    <Discoveries>
+      <Discovery ID="PrintMonitor.Discovery.Printer.PowerShellDiscovery" Enabled="true" Target="PrintMonitor.Class.Spooler" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="PrintMonitor.Class.Printer">
+            <Property PropertyID="PrinterName"/>
+            <Property PropertyID="DriverName"/>
+            <Property TypeID="System!System.Entity" PropertyID="DisplayName"/>
+          </DiscoveryClass>
+        </DiscoveryTypes>
+        <DataSource ID="TimePowerShell" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>60</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>TimedPowerShellPrinterDiscovery.ps1</ScriptName>
+          <ScriptBody>
+            <![CDATA[$IncludeFileContent/Resources/TimedPowerShellPrinterDiscovery.ps1$]]>
+          </ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>strSourceID</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>strManagedEntityID</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>strPrincipalName</Name>
+              <Value>$Target/Host/Property[Type='Windows!Microsoft.Windows.Computer']/PrincipalName$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>strSpoolerServiceName</Name>
+              <Value>$Target/Property[Type='PrintMonitor.Class.Spooler']/ServiceName$</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>300</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+    </Discoveries>
+  </Monitoring>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="PrintMonitor.Discovery.Printer.PowerShellDiscovery">
+          <Name>Printer PowerShell Discovery</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

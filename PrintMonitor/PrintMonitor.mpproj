@@ -1,0 +1,137 @@
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{3bf9e85b-b28e-4177-9c40-9a34ba523255}</ProjectGuid>
+    <RootNamespace>PrintMonitor</RootNamespace>
+    <Name>PrintMonitor</Name>
+    <ManagementPackName>PrintMonitor</ManagementPackName>
+    <Version>1.0.0.0</Version>
+    <MpFrameworkVersion>v7.0</MpFrameworkVersion>
+    <MpFrameworkProfile>OM</MpFrameworkProfile>
+    <ProductVersion>1.1.0.0</ProductVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <GenerateSealed>false</GenerateSealed>
+    <Company>MyCompany</Company>
+    <Copyright>Copyright (c) MyCompany. All rights reserved.</Copyright>
+    <DelaySigning>false</DelaySigning>
+    <AssemblyOriginatorKeyFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+    <DelaySigning>false</DelaySigning>
+    <Company>MyCompany</Company>
+    <Copyright>Copyright (c) MyCompany. All rights reserved.</Copyright>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <ManagementPackReference Include="Microsoft.SystemCenter.DataWarehouse.Library">
+      <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2012\Microsoft.SystemCenter.DataWarehouse.Library.mp</HintPath>
+      <Alias>SCDW</Alias>
+      <MinVersion>7.0.8427.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Library">
+      <Alias>SC</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.Windows.Library">
+      <Alias>Windows</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Health.Library">
+      <Alias>Health</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Library">
+      <Alias>System</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Visualization.Library">
+      <Alias>Visualization</Alias>
+      <PackageToBundle>false</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Performance.Library">
+      <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2012\System.Performance.Library.mp</HintPath>
+      <Alias>Performance</Alias>
+      <MinVersion>7.0.8427.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Monitoring\Discoveries\PrintMonitor.Discovery.Printer.PowerShellDiscovery.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Discoveries\PrintMonitor.Discovery.Spooler.PowerShellDiscovery.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Discoveries\PrintMonitor.Discovery.Spooler.RegistryDiscovery.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Monitors\PrintMonitor.Monitor.Printer.QueueCount.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Monitors\PrintMonitor.Monitor.Spooler.CheckService.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Rules\PrintMonitor.Rule.Spooler.AlertOnEvent7036.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Rules\PrintMonitor.Rule.Spooler.JobCount.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Folders\PrintMonitor.Folder.Printer.State.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Folders\PrintMonitor.Folder.Spooler.State.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Folders\PrintMonitor.Folder.Root.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Views\PrintMonitor.View.Spooler.Alerts.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Views\Templates1.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Presentation\Views\Templates1.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="TypeDefinitions\EntityTypes\ClassTypes\PrintMonitor.Class.Printer.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeDefinitions\EntityTypes\ClassTypes\PrintMonitor.Class.Spooler.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeDefinitions\EntityTypes\RelationshipTypes\PrintMonitor.RelationShip.SpoolerPrinterRelationship.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Monitoring" />
+    <Folder Include="Monitoring\Monitors" />
+    <Folder Include="Monitoring\Discoveries" />
+    <Folder Include="Monitoring\Rules" />
+    <Folder Include="Resources" />
+    <Folder Include="Presentation" />
+    <Folder Include="Presentation\Folders" />
+    <Folder Include="Presentation\Views" />
+    <Folder Include="TypeDefinitions" />
+    <Folder Include="TypeDefinitions\EntityTypes" />
+    <Folder Include="TypeDefinitions\EntityTypes\ClassTypes" />
+    <Folder Include="TypeDefinitions\EntityTypes\RelationshipTypes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Presentation\Views\Templates1.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\TimedPowerShellPrinterDiscovery.ps1" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
+</Project>

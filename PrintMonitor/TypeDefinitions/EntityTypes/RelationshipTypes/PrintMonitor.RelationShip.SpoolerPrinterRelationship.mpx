@@ -1,0 +1,12 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <RelationshipTypes>
+        <RelationshipType ID="PrintMonitor.RelationShip.SpoolerPrinterRelationship" Accessibility="Public" Abstract="false" Base="System!System.Hosting">
+          <Source ID="Source" Type="PrintMonitor.Class.Spooler" />
+          <Target ID="Target" Type="PrintMonitor.Class.Printer" />
+        </RelationshipType>
+      </RelationshipTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+</ManagementPackFragment>

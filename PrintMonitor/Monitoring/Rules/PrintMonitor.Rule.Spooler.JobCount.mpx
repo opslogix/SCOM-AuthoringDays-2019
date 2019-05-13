@@ -1,0 +1,29 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Monitoring>
+    <Rules>
+      <Rule ID="PrintMonitor.Rule.Spooler.JobCount" Enabled="true" Target="PrintMonitor.Class.Spooler" ConfirmDelivery="false" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>Custom</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="Performance!System.Performance.OptimizedDataProvider">
+            <ComputerName>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <CounterName>Jobs</CounterName>
+            <ObjectName>Print Queue</ObjectName>
+            <InstanceName></InstanceName>
+            <AllInstances>true</AllInstances>
+            <Frequency>60</Frequency>
+            <Tolerance>0</Tolerance>
+            <ToleranceType>Absolute</ToleranceType>
+            <MaximumSampleSeparation>1</MaximumSampleSeparation>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SC!Microsoft.SystemCenter.CollectPerformanceData" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishPerformanceData" />
+        </WriteActions>
+      </Rule>
+    </Rules>
+  </Monitoring>
+</ManagementPackFragment>
+
+
+ 

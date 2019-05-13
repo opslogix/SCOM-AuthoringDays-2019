@@ -1,0 +1,51 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Monitoring>
+    <Monitors>
+      <UnitMonitor ID="PrintMonitor.Monitor.Spooler.CheckService" Accessibility="Public" Enabled="true" Target="PrintMonitor.Class.Spooler" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Windows!Microsoft.Windows.CheckNTServiceStateMonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <AlertSettings AlertMessage="PrintMonitor.Monitor.Spooler.CheckService_AlertMessageResourceID">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>Error</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Target/Property[Type="System!System.Entity"]/DisplayName$</AlertParameter1>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="Running" MonitorTypeStateID="Running" HealthState="Success" />
+          <OperationalState ID="NotRunning" MonitorTypeStateID="NotRunning" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <ComputerName>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</ComputerName>
+          <ServiceName>Spooler</ServiceName>
+          <CheckStartupType />
+        </Configuration>
+      </UnitMonitor>
+    </Monitors>
+  </Monitoring>
+  <Presentation>
+    <StringResources>
+      <StringResource ID="PrintMonitor.Monitor.Spooler.CheckService_AlertMessageResourceID" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="PrintMonitor.Monitor.Spooler.CheckService">
+          <Name>Print Spooler</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrintMonitor.Monitor.Spooler.CheckService" SubElementID="NotRunning">
+          <Name>NotRunning</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrintMonitor.Monitor.Spooler.CheckService" SubElementID="Running">
+          <Name>Running</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrintMonitor.Monitor.Spooler.CheckService_AlertMessageResourceID">
+          <Name>Spooler</Name>
+          <Description>The Spooler service on {0} has stopped.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

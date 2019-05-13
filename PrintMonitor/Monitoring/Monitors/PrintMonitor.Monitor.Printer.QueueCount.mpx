@@ -1,0 +1,48 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Monitoring>
+  <Monitors>
+  <UnitMonitor ID="PrintMonitor.Monitor.Printer.QueueCount" Accessibility="Public" Enabled="true" Target="PrintMonitor.Class.Printer" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal"  TypeID="Windows!Microsoft.Windows.WmiBased.Performance.ThresholdMonitorType" ConfirmDelivery="false">
+    <Category>PerformanceHealth</Category>
+    <AlertSettings AlertMessage="PrintMonitor.Monitor.Printer.QueueCount.AlertMessage">
+      <AlertOnState>Warning</AlertOnState>
+      <AutoResolve>true</AutoResolve>
+      <AlertPriority>Normal</AlertPriority>
+      <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+      <AlertParameters>
+        <AlertParameter1>$Data/Context/Value$</AlertParameter1>
+      </AlertParameters>
+    </AlertSettings>
+    <OperationalStates>
+      <OperationalState ID="OverThreshold" MonitorTypeStateID="UnderThreshold" HealthState="Success" />
+      <OperationalState ID="UnderThreshold" MonitorTypeStateID="OverThreshold" HealthState="Error" />
+    </OperationalStates>
+    <Configuration>
+      <NameSpace>root\cimv2</NameSpace>
+      <Query>select Jobs from Win32_PerfFormattedData_Spooler_PrintQueue where Name = "$Target/Property[Type='PrintMonitor.Class.Printer']/PrinterName$"</Query>
+      <Frequency>60</Frequency>
+      <ObjectName>Printer</ObjectName>
+      <CounterName>Queued</CounterName>
+      <InstanceName />
+      <Value>$Data/Property[@Name='Jobs']$</Value>
+      <Threshold>2.0</Threshold>
+    </Configuration>
+  </UnitMonitor>
+  </Monitors>
+</Monitoring>
+  <Presentation>
+    <StringResources>
+      <StringResource ID="PrintMonitor.Monitor.Printer.QueueCount.AlertMessage" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack  ID="ENU" IsDefault="true">
+      <DisplayStrings>
+      <DisplayString ElementID="PrintMonitor.Monitor.Printer.QueueCount.AlertMessage">
+    <Name>Queue level is Unhealthy</Name>
+    <Description>Queue Is Unhealty . Level is now: {0}</Description>
+  </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+
+  </LanguagePacks>
+</ManagementPackFragment>
